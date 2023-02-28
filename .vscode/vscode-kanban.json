@@ -1,0 +1,60 @@
+{
+  "todo": [
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "category": "General",
+      "creation_time": "2023-02-28T02:34:42.142Z",
+      "description": {
+        "content": "Add tasks to board to practice!",
+        "mime": "text/markdown"
+      },
+      "id": "3",
+      "references": [],
+      "title": "Add Tasks"
+    }
+  ],
+  "in-progress": [
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "category": "General",
+      "creation_time": "2023-02-28T02:33:19.553Z",
+      "description": {
+        "content": "Watch rest of videos to set up MEAN stack app",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "Watch rest of videos to set up MEAN stack app.\n\nHere is the link to the [playlist](https://www.youtube.com/watch?v=6pdFXmTfkeE&list=PLillGF-RfqbZMNtaOXJQiDebNXjVapWPZ&index=5).",
+        "mime": "text/markdown"
+      },
+      "id": "2",
+      "references": [],
+      "title": "Finish Setting Up App"
+    }
+  ],
+  "testing": [],
+  "done": [
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "category": "Spotify",
+      "creation_time": "2023-02-28T02:27:29.310Z",
+      "description": {
+        "content": "Add spotify verification and keep token for a certain duration.",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "Add spotify verification and keep token for a certain duration.\n\nHere are some links that are useful:\nClient Auth\n- https://developer.spotify.com/documentation/general/guides/authorization/implicit-grant/\n- https://github.com/spotify/web-api-examples/tree/master/authentication/implicit_grant\n\nServer Auth\n- https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/\n- https://developer.spotify.com/documentation/general/guides/authorization/use-access-token/\n- https://www.youtube.com/watch?v=1vR3m0HupGI",
+        "mime": "text/markdown"
+      },
+      "id": "1",
+      "references": [],
+      "title": "Add Spotify Authentication to app",
+      "prio": 1
+    }
+  ]
+}
