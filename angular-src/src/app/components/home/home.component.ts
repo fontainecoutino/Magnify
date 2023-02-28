@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  constructor() {}
+
+  ngOnInit() {}
+
+  onLogin() {
+    console.log("logging in!")
+  }
 }

@@ -1,0 +1,11 @@
+.btn {
+    --bs-btn-bg: var(--bd-violet);
+    --bs-btn-border-color: var(--bd-violet);
+    --bs-btn-border-radius: .5rem;
+    --bs-btn-hover-color: #FF7D7D;
+    --bs-btn-hover-bg: #{shade-color($bd-violet, 10%)};
+}
+
+top-navbar, bottom-navbar {
+    height: 50%;
+}
