@@ -1,0 +1,11 @@
+.home{
+    height: 100%;
+    border: 2px solid red;
+}
+
+.content{
+    height: 95%;
+}
+.footer{
+    height: 5%;
+}

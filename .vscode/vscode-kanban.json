@@ -13,6 +13,42 @@
       "id": "3",
       "references": [],
       "title": "Add Tasks"
+    },
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "category": "FrontEnd",
+      "creation_time": "2023-02-28T07:19:52.616Z",
+      "description": {
+        "content": "Create home page of app",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "Add a welcome message and nice ui.",
+        "mime": "text/markdown"
+      },
+      "id": "4",
+      "references": [],
+      "title": "Create HomePage"
+    },
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "category": "FrontEnd",
+      "creation_time": "2023-02-28T07:21:42.982Z",
+      "description": {
+        "content": "Add support for multiple languages",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "Modify front end to remove hard string and store in json file.\nLook at [this](https://blog.knoldus.com/diversifying-angular-app-multi-lingual-support/#:~:text=Angular%20supports%20multi%2Dlanguages%20natively,different%20languages%20for%20different%20locales.) to help.",
+        "mime": "text/markdown"
+      },
+      "id": "5",
+      "references": [],
+      "title": "Multiple Languages"
     }
   ],
   "in-progress": [
@@ -20,19 +56,19 @@
       "assignedTo": {
         "name": "fontainecoutino"
       },
-      "category": "General",
-      "creation_time": "2023-02-28T02:33:19.553Z",
+      "category": "FrontEnd",
+      "creation_time": "2023-02-28T07:32:23.812Z",
       "description": {
-        "content": "Watch rest of videos to set up MEAN stack app",
+        "content": "Create a navbar component to traverse between home, about and help.",
         "mime": "text/markdown"
       },
       "details": {
-        "content": "Watch rest of videos to set up MEAN stack app.\n\nHere is the link to the [playlist](https://www.youtube.com/watch?v=6pdFXmTfkeE&list=PLillGF-RfqbZMNtaOXJQiDebNXjVapWPZ&index=5).",
+        "content": "NavBar component should be a modal that pops over from the right and should include three buttons (home, anout, help). At the bottom there should be a link to BuyMeACoffee.\n- Home: Takes you back to the home page where you begin the process of starting a playlist\n- About: Takes you to about page that describes what is and purpose of tool\n- Help: Takes to page to describe how to use the tool.",
         "mime": "text/markdown"
       },
-      "id": "2",
+      "id": "6",
       "references": [],
-      "title": "Finish Setting Up App"
+      "title": "NavBar Component"
     }
   ],
   "testing": [],
@@ -55,6 +91,38 @@
       "references": [],
       "title": "Add Spotify Authentication to app",
       "prio": 1
+    },
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "category": "FrontEnd",
+      "creation_time": "2023-02-28T17:38:15.823Z",
+      "description": {
+        "content": "Add footer of page",
+        "mime": "text/markdown"
+      },
+      "id": "7",
+      "references": [],
+      "title": "Add footer"
+    },
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "category": "General",
+      "creation_time": "2023-02-28T02:33:19.553Z",
+      "description": {
+        "content": "Watch rest of videos to set up MEAN stack app",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "Watch rest of videos to set up MEAN stack app.\n\nHere is the link to the [playlist](https://www.youtube.com/watch?v=6pdFXmTfkeE&list=PLillGF-RfqbZMNtaOXJQiDebNXjVapWPZ&index=5).",
+        "mime": "text/markdown"
+      },
+      "id": "2",
+      "references": [],
+      "title": "Finish Setting Up App"
     }
   ]
 }
