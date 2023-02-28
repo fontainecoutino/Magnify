@@ -1,0 +1,22 @@
+{
+  "name": "spotifymagnify",
+  "version": "1.0.0",
+  "description": "spotify playlist generator",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "dotenv": "^16.0.3",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "passport": "*",
+    "passport-jwt": "*"
+  },
+  "author": "Fontaine Coutino",
+  "license": "ISC"
+}
