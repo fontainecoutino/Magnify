@@ -8,13 +8,16 @@
 
         <!-- buttons -->
         <div class="link-button-list">
-            <div class="animate__animated d-flex justify-content-center btn btn-offcanvas-custom">
+            <div class="animate__animated d-flex justify-content-center btn btn-offcanvas-custom"
+                [routerLink]="['/']" (click)="offcanvas.dismiss('Cross click')">
                 HOME
             </div>
-            <div class="animate__animated d-flex justify-content-center btn btn-offcanvas-custom">
+            <div class="animate__animated d-flex justify-content-center btn btn-offcanvas-custom"
+                [routerLink]="['/about']" (click)="offcanvas.dismiss('Cross click')">
                 ABOUT
             </div>
-            <div class="animate__animated d-flex justify-content-center btn btn-offcanvas-custom">
+            <div class="animate__animated d-flex justify-content-center btn btn-offcanvas-custom"
+                [routerLink]="['/help']" (click)="offcanvas.dismiss('Cross click')">
                 HELP
             </div>
         </div>

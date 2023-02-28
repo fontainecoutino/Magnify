@@ -25,6 +25,7 @@ export class NavbarComponent {
         }
       );
   }
+  
   private getDismissReason(reason: any): string {
     if (reason === OffcanvasDismissReasons.ESC) {
       return 'by pressing ESC';
