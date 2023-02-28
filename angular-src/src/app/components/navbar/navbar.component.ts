@@ -15,8 +15,7 @@ export class NavbarComponent {
   open(content: any) {
     this.offcanvasService
       .open(content, { 
-        position: 'end',
-         })
+        position: 'end'})
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;

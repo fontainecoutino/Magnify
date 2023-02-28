@@ -1,11 +1,63 @@
-.btn {
-    --bs-btn-bg: var(--bd-violet);
-    --bs-btn-border-color: var(--bd-violet);
-    --bs-btn-border-radius: .5rem;
-    --bs-btn-hover-color: #FF7D7D;
-    --bs-btn-hover-bg: #{shade-color($bd-violet, 10%)};
+
+.icon-button:hover{
+    color: #da2c38;
+    cursor: pointer;
+
+    animation: pulse;
+    animation-duration: .5s; 
+}
+
+.open-canvas-icon{
+    color: #43291F;
+    font-size: 50px;
+    position: absolute;
+    top: 5%; right: 5%;
+}
+
+.close-button-icon{
+    color: #F4F0BB;
+    font-size: 35px;
 }
 
 top-navbar, bottom-navbar {
     height: 50%;
+}
+
+.offcanvas-body{
+    background-color: #43291F;
+    border: 0px;
+}
+
+.close-button{
+    height: 10%;
+}
+
+.link-button-list{
+    height: 90%;
+    padding-top: 10px;
+}
+
+.btn-offcanvas-custom{
+    color: #191210;
+    background-color: #F4F0BB;
+    border-radius: 15px;
+    border: 0px;
+    
+    width: 65%;
+    margin-left: 17.5%;
+    margin-bottom: 25px;
+
+    animation: fadeOutRight;
+    animation-duration: 3s;
+    animation-play-state: paused;
+}
+
+.btn-offcanvas-custom:hover{
+    animation: pulse;
+    animation-duration: .5s; 
+}
+
+.btn-offcanvas-custom:active{
+    animation: fadeOutRight;
+    animation-duration: 3s;
 }
