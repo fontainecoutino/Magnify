@@ -19,24 +19,6 @@
         "name": "fontainecoutino"
       },
       "category": "FrontEnd",
-      "creation_time": "2023-02-28T07:19:52.616Z",
-      "description": {
-        "content": "Create home page of app",
-        "mime": "text/markdown"
-      },
-      "details": {
-        "content": "Add a welcome message and nice ui.",
-        "mime": "text/markdown"
-      },
-      "id": "4",
-      "references": [],
-      "title": "Create HomePage"
-    },
-    {
-      "assignedTo": {
-        "name": "fontainecoutino"
-      },
-      "category": "FrontEnd",
       "creation_time": "2023-02-28T07:21:42.982Z",
       "description": {
         "content": "Add support for multiple languages",
@@ -57,18 +39,18 @@
         "name": "fontainecoutino"
       },
       "category": "FrontEnd",
-      "creation_time": "2023-02-28T07:32:23.812Z",
+      "creation_time": "2023-02-28T07:19:52.616Z",
       "description": {
-        "content": "Create a navbar component to traverse between home, about and help.",
+        "content": "Create home page of app",
         "mime": "text/markdown"
       },
       "details": {
-        "content": "NavBar component should be a modal that pops over from the right and should include three buttons (home, anout, help). At the bottom there should be a link to BuyMeACoffee.\n- Home: Takes you back to the home page where you begin the process of starting a playlist\n- About: Takes you to about page that describes what is and purpose of tool\n- Help: Takes to page to describe how to use the tool.",
+        "content": "Add a welcome message and nice ui.",
         "mime": "text/markdown"
       },
-      "id": "6",
+      "id": "4",
       "references": [],
-      "title": "NavBar Component"
+      "title": "Create HomePage"
     }
   ],
   "testing": [],
@@ -123,6 +105,24 @@
       "id": "2",
       "references": [],
       "title": "Finish Setting Up App"
+    },
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "category": "FrontEnd",
+      "creation_time": "2023-02-28T07:32:23.812Z",
+      "description": {
+        "content": "Create a navbar component to traverse between home, about and help.",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "NavBar component should be a modal that pops over from the right and should include three buttons (home, anout, help). At the bottom there should be a link to BuyMeACoffee.\n- Home: Takes you back to the home page where you begin the process of starting a playlist\n- About: Takes you to about page that describes what is and purpose of tool\n- Help: Takes to page to describe how to use the tool.",
+        "mime": "text/markdown"
+      },
+      "id": "6",
+      "references": [],
+      "title": "NavBar Component"
     }
   ]
 }

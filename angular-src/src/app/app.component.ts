@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {startNetworkAnimation} from "./scripts/network.js"
 
 @Component({
   selector: 'app-root',

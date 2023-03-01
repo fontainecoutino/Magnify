@@ -2,8 +2,11 @@
     width: 100%;
     height: 100%;
     background-color: #F4F0BB;
+    background-image: linear-gradient(300deg, #87c38f87, #F4F0BB 45%);
+    border-radius: 5px;
 }
 
 .container{
     height: 100%;
+    width: 100%;
 }
