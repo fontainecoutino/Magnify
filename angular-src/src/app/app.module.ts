@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AboutComponent } from './components/pages/about/about.component';
 import { HelpPageComponent } from './components/pages/help-page/help-page.component';
 
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
