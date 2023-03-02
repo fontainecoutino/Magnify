@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, isDevMode } from '@angular/core';
 import {startNetworkAnimation} from "./scripts/network.js"
+import { environment } from '../environment/environment';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,12 @@ import {startNetworkAnimation} from "./scripts/network.js"
 })
 export class AppComponent {
   title = 'angular-src';
+
+  ngOnInit() {
+    if (isDevMode()) {
+      console.log('Development!');
+    } else {
+      console.log('Production!');
+    }
+  }
 }

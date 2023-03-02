@@ -1,3 +1,4 @@
 node_modules
 *.env
 vscode-kanban.json
+angular-src/src/environment/environment.ts

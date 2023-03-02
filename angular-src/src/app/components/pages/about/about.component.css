@@ -1,0 +1,78 @@
+.about{
+    height: 100%;
+}
+
+.content{
+    height: 95%;
+}
+.footer{
+    height: 5%;
+}
+
+.title-component{
+    position: relative;
+    top: 150px;
+}
+
+.title-text {
+    font-weight: 900;
+    margin: 0;
+}
+
+.spotify-title{
+    font-size: 4.5em;
+    color: #87C38F;
+
+    animation: backInLeft;
+    animation-duration: 1s;
+}
+
+.magnify-title{
+    font-size: 7em;
+    color: #226F54;
+
+    margin-top: -20px;
+
+    animation: backInLeft;
+    animation-duration: 2s;
+}
+
+.welcome-message-group{
+    animation: fadeInLeft;
+    animation-duration: 1.25s;
+}
+
+/* h1, p {
+    cursor: default;
+} */
+
+.btn-login  {
+    font-size: 20px;
+    font-weight: 200;
+    color: #F8F3F2;
+    letter-spacing: 1px;
+    padding: 13px 50px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  
+.btn-login::after {
+    content: "";
+    background-color: #DA2C38;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+    border-radius: 5px;
+}
+
+.btn-login:hover::after {
+    top: 0px;
+    left: 0px;
+}
