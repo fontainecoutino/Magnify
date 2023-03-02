@@ -9,9 +9,8 @@
     height: 5%;
 }
 
-.title-component{
-    position: relative;
-    top: 150px;
+.main-component{
+    padding-top: 150px;
 }
 
 .title-text {
@@ -20,31 +19,17 @@
 }
 
 .spotify-title{
-    font-size: 4.5em;
+    font-size: 3em;
     color: #87C38F;
 
-    animation: backInLeft;
-    animation-duration: 1s;
 }
 
-.magnify-title{
-    font-size: 7em;
-    color: #226F54;
-
-    margin-top: -20px;
-
-    animation: backInLeft;
-    animation-duration: 2s;
+.about-content{
 }
 
-.welcome-message-group{
-    animation: fadeInLeft;
-    animation-duration: 1.25s;
-}
-
-/* h1, p {
+h1 {
     cursor: default;
-} */
+} 
 
 .btn-login  {
     font-size: 20px;
