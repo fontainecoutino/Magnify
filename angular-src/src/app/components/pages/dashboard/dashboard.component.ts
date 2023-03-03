@@ -11,23 +11,28 @@ import { environment } from 'src/environment/environment';
 export class DashboardComponent {
   access_token: string | null;
 
+  userLoggedIn = false
+  shouldLoadFadeIn = true
+  shouldLoadFadeOut = false
+
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute ) {
     this.access_token = "";
   }
 
   ngOnInit() {
     if (this.getHashParams()){   // log in to spotify was succesful
+      this.userLoggedIn = true;
+      this.shouldLoadFadeOut = true
       if (this.access_token) {
         this.getProfileInfo()
       } else {
         this.errorLoginIn()
       }
-
     } else { // not logged in so login to spotify
       this.spotifyClientLogIn()
     }
   }
-  
+
   errorLoginIn() {
     console.log('There was an error during the authentication');
     this.router.navigate([ '/' ])

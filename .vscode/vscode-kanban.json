@@ -4,6 +4,23 @@
       "assignedTo": {
         "name": "fontainecoutino"
       },
+      "creation_time": "2023-03-03T15:34:45.599Z",
+      "description": {
+        "content": "Add loading animation when entering and exiting page",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "Add loading animation when entering and exiting page\n\n### Entering\n- Home: Load from side\n- About/Help: None\n- Everything else: circle load and then appear from bottoms\n\n### Exiting\n- Everything: Fade upwards",
+        "mime": "text/markdown"
+      },
+      "id": "9",
+      "references": [],
+      "title": "Add animations to current pages"
+    },
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
       "category": "General",
       "creation_time": "2023-02-28T02:34:42.142Z",
       "description": {
@@ -33,26 +50,7 @@
       "title": "Multiple Languages"
     }
   ],
-  "in-progress": [
-    {
-      "assignedTo": {
-        "name": "fontainecoutino"
-      },
-      "category": "FrontEnd",
-      "creation_time": "2023-02-28T07:19:52.616Z",
-      "description": {
-        "content": "Create home page of app",
-        "mime": "text/markdown"
-      },
-      "details": {
-        "content": "Add a welcome message and nice ui.",
-        "mime": "text/markdown"
-      },
-      "id": "4",
-      "references": [],
-      "title": "Create HomePage"
-    }
-  ],
+  "in-progress": [],
   "testing": [],
   "done": [
     {
@@ -87,6 +85,37 @@
       "id": "7",
       "references": [],
       "title": "Add footer"
+    },
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "category": "FrontEnd",
+      "creation_time": "2023-02-28T07:19:52.616Z",
+      "description": {
+        "content": "Create home page of app",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "Add a welcome message and nice ui.",
+        "mime": "text/markdown"
+      },
+      "id": "4",
+      "references": [],
+      "title": "Create HomePage"
+    },
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "creation_time": "2023-03-03T15:32:04.326Z",
+      "description": {
+        "content": "Make spotify login and maintain clientid",
+        "mime": "text/markdown"
+      },
+      "id": "8",
+      "references": [],
+      "title": "Create succesful spotify login"
     },
     {
       "assignedTo": {
