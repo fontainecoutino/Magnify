@@ -1,0 +1,26 @@
+<div class="not-found">
+    <div class="content row">
+        <div class="left-component col-8">
+            <div class="title-group">
+                <h1 class="title-text spotify-title">404 Not Found</h1>
+            </div>
+            <div class="welcome-message-group">
+                <p class="lead">
+                    The page you are looking for doesn't exist.
+                </p>
+                <p class="lead">
+                    Go back to the home page to get started!
+                </p>
+            </div>
+            
+            <div class="login-component">
+                <button type="button" class="btn btn-login" (click)="onTakeHome();">
+                    Take me home
+                </button>
+            </div>
+        </div>
+        <div class="right-component col-4">
+            <img class="dance-gif" [src]="danceGifPath" />
+        </div>
+    </div>
+</div>

@@ -12,6 +12,7 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { AboutComponent } from './components/pages/about/about.component';
 import { HelpPageComponent } from './components/pages/help-page/help-page.component';
+import { PagenotfoundComponent } from './components/pages/pagenotfound/pagenotfound.component';
 
 
 const appRoutes: Routes = [
@@ -19,6 +20,9 @@ const appRoutes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'about', component: AboutComponent},
   {path: 'help', component: HelpPageComponent},
+
+  { path: '**', pathMatch: 'full', 
+        component: PagenotfoundComponent },
 ]
 
 @NgModule({
@@ -29,7 +33,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     FooterComponent,
     AboutComponent,
-    HelpPageComponent
+    HelpPageComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
