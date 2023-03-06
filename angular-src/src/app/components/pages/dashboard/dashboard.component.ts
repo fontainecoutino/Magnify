@@ -11,9 +11,15 @@ import { environment } from 'src/environment/environment';
 export class DashboardComponent {
   access_token: string | null;
 
-  userLoggedIn = false
-  shouldLoadFadeIn = true
-  shouldLoadFadeOut = false
+  userLoggedIn = false;
+  shouldLoadFadeIn = true;
+  shouldLoadFadeOut = false;
+  shouldContentFadeIn = false;
+  shouldContentFadeLeft = false;
+  showDescription = false;
+  showAlgorithmDescription = false;
+  showCustomizeDescription = false;
+  showMagnifyDescription = false;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute ) {
     this.access_token = "";
@@ -22,9 +28,9 @@ export class DashboardComponent {
   ngOnInit() {
     if (this.getHashParams()){   // log in to spotify was succesful
       this.userLoggedIn = true;
-      this.shouldLoadFadeOut = true
+      this.shouldLoadFadeOut = true;
       if (this.access_token) {
-        this.getProfileInfo()
+        this.loadContent()
       } else {
         this.errorLoginIn()
       }
@@ -33,9 +39,32 @@ export class DashboardComponent {
     }
   }
 
+  loadContent(){
+    this. shouldContentFadeIn = true;
+  }
+
   errorLoginIn() {
     console.log('There was an error during the authentication');
     this.router.navigate([ '/' ])
+  }
+
+  openDescription(mode: string) {
+    this.showDescription = true;
+
+    this.showAlgorithmDescription = false;
+    this.showCustomizeDescription = false;
+    this.showMagnifyDescription = false;
+
+    if (mode == "algorithm"){
+      this.showAlgorithmDescription = true;
+
+    } else if (mode == "customize"){
+      this.showCustomizeDescription = true;
+
+    } else if (mode == "magnify"){
+      this.showMagnifyDescription = true;
+
+    }
   }
 
   getProfileInfo() {
@@ -55,7 +84,11 @@ export class DashboardComponent {
     var client_id = environment.spotifyClientID;
     var redirect_uri = environment.spotifyRedirctURI;
 
-    var scope = 'user-read-private user-read-email';
+    var scopes: string[] = [
+      'user-read-private', 'ugc-image-upload', 'playlist-read-private',
+      'playlist-read-collaborative', 'user-library-modify', 'playlist-modify-private',
+      'playlist-modify-public', 'user-top-read', 'user-read-recently-played', 'user-library-read'];
+    var scope = scopes.join(' ');
 
     var url = 'https://accounts.spotify.com/authorize';
     url += '?response_type=token';

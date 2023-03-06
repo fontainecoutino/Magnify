@@ -4,37 +4,6 @@
       "assignedTo": {
         "name": "fontainecoutino"
       },
-      "creation_time": "2023-03-03T15:34:45.599Z",
-      "description": {
-        "content": "Add loading animation when entering and exiting page",
-        "mime": "text/markdown"
-      },
-      "details": {
-        "content": "Add loading animation when entering and exiting page\n\n### Entering\n- Home: Load from side\n- About/Help: None\n- Everything else: circle load and then appear from bottoms\n\n### Exiting\n- Everything: Fade upwards",
-        "mime": "text/markdown"
-      },
-      "id": "9",
-      "references": [],
-      "title": "Add animations to current pages"
-    },
-    {
-      "assignedTo": {
-        "name": "fontainecoutino"
-      },
-      "category": "General",
-      "creation_time": "2023-02-28T02:34:42.142Z",
-      "description": {
-        "content": "Add tasks to board to practice!",
-        "mime": "text/markdown"
-      },
-      "id": "3",
-      "references": [],
-      "title": "Add Tasks"
-    },
-    {
-      "assignedTo": {
-        "name": "fontainecoutino"
-      },
       "category": "FrontEnd",
       "creation_time": "2023-02-28T07:21:42.982Z",
       "description": {
@@ -71,6 +40,23 @@
       "references": [],
       "title": "Add Spotify Authentication to app",
       "prio": 1
+    },
+    {
+      "assignedTo": {
+        "name": "fontainecoutino"
+      },
+      "creation_time": "2023-03-03T15:34:45.599Z",
+      "description": {
+        "content": "Add loading animation when entering and exiting page",
+        "mime": "text/markdown"
+      },
+      "details": {
+        "content": "Add loading animation when entering and exiting page\n\n### Entering\n- Home: Load from side\n- About/Help: None\n- Everything else: circle load and then appear from bottoms\n\n### Exiting\n- Everything: Fade upwards",
+        "mime": "text/markdown"
+      },
+      "id": "9",
+      "references": [],
+      "title": "Add animations to current pages"
     },
     {
       "assignedTo": {
