@@ -1,7 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'src/environment/environment';
+import { Router } from '@angular/router';
+import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +8,8 @@ import { environment } from 'src/environment/environment';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  access_token: string | null;
+  access_token = "";
+  username = "";
 
   userLoggedIn = false;
   shouldLoadFadeIn = true;
@@ -21,82 +21,39 @@ export class DashboardComponent {
   showCustomizeDescription = false;
   showMagnifyDescription = false;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute ) {
+  constructor(private router: Router, private spotify: SpotifyService ) {
     this.access_token = "";
   }
 
   ngOnInit() {
     if (this.getHashParams()){   // log in to spotify was succesful
-      this.userLoggedIn = true;
       this.shouldLoadFadeOut = true;
-      if (this.access_token) {
-        this.loadContent()
-      } else {
-        this.errorLoginIn()
-      }
+
+      this.spotify.checkToken(this.access_token).then((res)=>{
+        if (res) {
+          this.loadContent()
+        } else {
+          this.errorLoginIn()
+        }
+      })
+
     } else { // not logged in so login to spotify
-      this.spotifyClientLogIn()
+      this.spotify.clientLogIn()
     }
   }
 
   loadContent(){
+    this.spotify.getUserProfileName(this.access_token).then((res)=>{
+      this.username = res;
+    })
+    this.userLoggedIn = true;
     this. shouldContentFadeIn = true;
+    
   }
 
   errorLoginIn() {
     console.log('There was an error during the authentication');
-    this.router.navigate([ '/' ])
-  }
-
-  openDescription(mode: string) {
-    this.showDescription = true;
-
-    this.showAlgorithmDescription = false;
-    this.showCustomizeDescription = false;
-    this.showMagnifyDescription = false;
-
-    if (mode == "algorithm"){
-      this.showAlgorithmDescription = true;
-
-    } else if (mode == "customize"){
-      this.showCustomizeDescription = true;
-
-    } else if (mode == "magnify"){
-      this.showMagnifyDescription = true;
-
-    }
-  }
-
-  getProfileInfo() {
-    var url = 'https://api.spotify.com/v1/me';
-    console.log("here", url, this.access_token)
-
-    var req = this.http.get(url, {headers: new HttpHeaders({'Authorization': 'Bearer ' + this.access_token})})
-    
-    req.subscribe(
-      {
-        next: (v) => console.log(v),
-        error: (e) => console.error(e)
-    })
-  }
-
-  private spotifyClientLogIn() {
-    var client_id = environment.spotifyClientID;
-    var redirect_uri = environment.spotifyRedirctURI;
-
-    var scopes: string[] = [
-      'user-read-private', 'ugc-image-upload', 'playlist-read-private',
-      'playlist-read-collaborative', 'user-library-modify', 'playlist-modify-private',
-      'playlist-modify-public', 'user-top-read', 'user-read-recently-played', 'user-library-read'];
-    var scope = scopes.join(' ');
-
-    var url = 'https://accounts.spotify.com/authorize';
-    url += '?response_type=token';
-    url += '&client_id=' + encodeURIComponent(client_id);
-    url += '&scope=' + encodeURIComponent(scope);
-    url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
-
-    window.location.href = url;
+    //this.router.navigate([ '/' ])
   }
 
   /**

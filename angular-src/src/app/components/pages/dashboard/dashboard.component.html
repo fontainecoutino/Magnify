@@ -5,11 +5,10 @@
     </div>
 </div>
 
-<div class="not-found" *ngIf="userLoggedIn"
-  [class.animate__fadeInUp]="shouldContentFadeIn" [class.animate__fadeOutLeft]="shouldContentFadeLeft">
+<div class="not-found" *ngIf="userLoggedIn">
     <div class="content animate__animated animate__jackInTheBox">
         <div class="title-group">
-            <h1 class="title-text spotify-title animate__animated animate__jackInTheBox">Hi Fontaine</h1>
+            <h1 class="title-text spotify-title animate__animated animate__jackInTheBox">Hi {{username}}</h1>
         </div>
         <div class="welcome-message-group">
             <p class="lead">
@@ -20,7 +19,7 @@
         </div>
         
         <div class="p-4 justify-content-center">
-            <button type="button animate__animated" class="slide" (click)="openDescription('algorithm')">
+            <button type="button animate__animated" class="slide">
                 <div>Create</div>
             </button>
         </div>

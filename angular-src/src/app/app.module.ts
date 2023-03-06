@@ -13,6 +13,8 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { AboutComponent } from './components/pages/about/about.component';
 import { HelpPageComponent } from './components/pages/help-page/help-page.component';
 import { PagenotfoundComponent } from './components/pages/pagenotfound/pagenotfound.component';
+import { GenerateComponent } from './components/pages/generate/generate.component';
+import { SpotifyService } from './services/spotify.service';
 
 
 const appRoutes: Routes = [
@@ -20,6 +22,7 @@ const appRoutes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'about', component: AboutComponent},
   {path: 'help', component: HelpPageComponent},
+  {path: 'generate', component: GenerateComponent},
 
   { path: '**', pathMatch: 'full', 
         component: PagenotfoundComponent },
@@ -34,7 +37,8 @@ const appRoutes: Routes = [
     FooterComponent,
     AboutComponent,
     HelpPageComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    GenerateComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,9 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ 
+    SpotifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

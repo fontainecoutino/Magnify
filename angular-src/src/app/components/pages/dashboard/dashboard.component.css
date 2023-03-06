@@ -36,6 +36,7 @@
 
 h1 {
     cursor: default;
+    overflow:hidden;
 }
 
 /* Slide button styling */
