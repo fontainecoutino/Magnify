@@ -1,9 +1,4 @@
-<div *ngIf="!userLoggedIn" class="loadingPage animate__animated"
-    [class.animate__fadeInUp]="shouldLoadFadeIn" [class.animate__fadeOutUp]="shouldLoadFadeOut">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-</div>
+<app-loading-page [userLoggedIn]="userLoggedIn"></app-loading-page>
 
 <div class="not-found" *ngIf="userLoggedIn">
     <div class="content animate__animated animate__jackInTheBox">

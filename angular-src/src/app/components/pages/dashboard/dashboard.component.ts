@@ -12,8 +12,7 @@ export class DashboardComponent {
   username = "";
 
   userLoggedIn = false;
-  shouldLoadFadeIn = true;
-  shouldLoadFadeOut = false;
+
   shouldContentFadeIn = false;
   shouldContentFadeLeft = false;
   showDescription = false;
@@ -27,8 +26,6 @@ export class DashboardComponent {
 
   ngOnInit() {
     if (this.getHashParams()){   // log in to spotify was succesful
-      this.shouldLoadFadeOut = true;
-
       this.spotify.checkToken(this.access_token).then((value)=>{
         if (value) {
           this.loadContent()
