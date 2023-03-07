@@ -29,8 +29,8 @@ export class DashboardComponent {
     if (this.getHashParams()){   // log in to spotify was succesful
       this.shouldLoadFadeOut = true;
 
-      this.spotify.checkToken(this.access_token).then((res)=>{
-        if (res) {
+      this.spotify.checkToken(this.access_token).then((value)=>{
+        if (value) {
           this.loadContent()
         } else {
           this.errorLoginIn()
@@ -54,6 +54,10 @@ export class DashboardComponent {
   errorLoginIn() {
     console.log('There was an error during the authentication');
     //this.router.navigate([ '/' ])
+  }
+
+  onCreate(){
+    this.router.navigate([ '/generate' ], {queryParams: { auth_token: this.access_token }})
   }
 
   /**

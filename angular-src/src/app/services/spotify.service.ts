@@ -17,7 +17,7 @@ export class SpotifyService {
         var redirect_uri = environment.spotifyRedirctURI;
 
         var scopes: string[] = [
-        'user-read-private', 'ugc-image-upload', 'playlist-read-private',
+        'user-read-private', 'user-read-email', 'ugc-image-upload', 'playlist-read-private',
         'playlist-read-collaborative', 'user-library-modify', 'playlist-modify-private',
         'playlist-modify-public', 'user-top-read', 'user-read-recently-played', 'user-library-read'];
         var scope = scopes.join(' ');
@@ -31,19 +31,13 @@ export class SpotifyService {
         window.location.href = url;
     }
 
-    checkToken(token: string) {
-      return this.getUserProfile(token).then((res: SpotifyUserProfile) => {
-        console.log(res)
-        if (res.display_name == undefined){
-          return false;
-        } else {
-          return true;
-        }
-      })
+    async checkToken(token: string) {
+      const profile = await this.getUserProfile(token);
+      return profile.display_name != undefined
     }
 
     // USER
-    async getUserProfile(token:string) {
+    async getUserProfile(token: string) {
       var url = 'https://api.spotify.com/v1/me';
       const result = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` }});
       return await result.json();
@@ -52,5 +46,12 @@ export class SpotifyService {
     getUserProfileName(token: string){
       return this.getUserProfile(token).then((res: SpotifyUserProfile) => { return res.display_name; })
     }
+
+    // TOP
+    // async getTopItem(token: string, type: string){
+    //   var url = 'https://api.spotify.com/v1/me/top/' + type + '?' + new URLSearchParams({ 'foo': 'value', 'bar': 2 }).toString();
+    //   const result = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` }});
+    //   return await result.json();
+    // }
 
 }

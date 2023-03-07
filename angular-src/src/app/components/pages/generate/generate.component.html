@@ -1,0 +1,12 @@
+<div class="not-found" *ngIf="userLoggedIn">
+    <div class="content animate__animated animate__jackInTheBox">
+        <div class="title-group">
+            <h1 class="title-text spotify-title animate__animated animate__jackInTheBox">Creating ...</h1>
+        </div>
+        
+        <div class="progressBar">
+            <ngb-progressbar type="success" [value]="progress" height="50px" [striped]="true" [animated]="true"></ngb-progressbar>
+        </div>
+
+    </div>
+</div>

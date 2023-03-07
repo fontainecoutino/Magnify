@@ -1,0 +1,39 @@
+.loadingPage{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+
+.spinner-border{
+    width: 5em;
+    height: 5em;
+}
+
+.home{
+    height: 100%;
+}
+
+.content{
+    height: 95%;
+    width: 85%;
+    padding-top: 150px;
+}
+
+.main-component{
+    position: relative;
+    top: 150px;
+}
+
+.spotify-title{
+    font-size: 4.5em;
+    color: #87C38F;
+}
+
+h1 {
+    cursor: default;
+    overflow:hidden;
+}
+
+.progressBar{
+  margin-top: 50px;
+}
