@@ -12,6 +12,7 @@ import { SpotifySong } from 'src/interfaces/spotify.interface';
 export class GenerateComponent {
   
   auth_token = "";
+  id = "";
   
   userLoggedIn = false;
   progress = 0;
@@ -24,6 +25,7 @@ export class GenerateComponent {
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       this.auth_token = params['auth_token'];
+      this.id = params['user_id'];
       this.spotify.checkToken(this.auth_token).then((valid) => {
         if (valid) {
           this.loadContent();
@@ -49,44 +51,46 @@ export class GenerateComponent {
     this.progress += 20
 
     // get recommendations
-    var artistRecommendedSongs: string[] = await this.getArtistsRecomendations(artists);
-    var songsRecommendedSongs: string[] = await this.getSongsRecomendations(songs);
+    var artistRecommendedSongs: SpotifySong[] = await this.getArtistsRecomendations(artists);
+    var songsRecommendedSongs: SpotifySong[] = await this.getSongsRecomendations(songs);
     this.progress += 20
 
     // tailor songs
-    var tailoredArtistSongs: string[] = this.tailorArray(artistRecommendedSongs, 5)
-    var tailoredSongsSongs: string[] = this.tailorArray(songsRecommendedSongs, 20)
-    var playlistSongs: string[] = tailoredArtistSongs.concat(tailoredSongsSongs)
-    this.progress += 20
+    var tailoredArtistSongs: SpotifySong[] = this.tailorArray(artistRecommendedSongs, 5)
+    var tailoredSongsSongs: SpotifySong[] = this.tailorArray(songsRecommendedSongs, 20)
+    var playlistSongs: SpotifySong[] = tailoredArtistSongs.concat(tailoredSongsSongs)
+    playlistSongs = this.shufflePlaylist(playlistSongs)
 
-    console.log(playlistSongs)
-    console.log(this.progress)
+    // create and publish playlist
+    this.publishPlaylist(playlistSongs)
+    this.progress += 20
 
     // get image
     this.progress += 20
-
-    // create and publish playlist
-    this.progress += 20
     
   }
+  
+  async publishPlaylist(playlist: SpotifySong[]) {
+    console.log(playlist)
+    var playlistId = (await this.spotify.createPlaylist(this.auth_token, this.id ,"pano-shein")).id
 
-  tailorArray(array: any[], target: number) {
-    var finalArray:any[] = []
-    for (var i = 0 ; i < target ; i++){
-      finalArray.push(array[this.getRandomNumber(array.length)])
+    var uris: string[] = []
+    for (var song of playlist){
+      uris.push(`${song.uri}`)
     }
-    return finalArray;
+    this.spotify.addItemToPlaylist(this.auth_token, playlistId, uris)
+
   }
 
   async getSongsRecomendations(songs: string[]) {
-    var recommendedSongs: string[] = []
+    var recommendedSongs: SpotifySong[] = []
 
     for (let i = 0; i < 4 ; i++){
-      let songsToRecommend: string[] = this.tailorArray(songs, 5);
+      let songsToRecommend: SpotifySong[] = this.tailorArray(songs, 5);
       let seedSongs = songsToRecommend.join(",")
-      // recommendation req (100, max_popularity .5)
-      let recommendedSongsReq: string[] = (await this.spotify.getRecommendations(this.auth_token, ",", seedSongs, "100", "50")).tracks
+      let recommendedSongsReq: SpotifySong[] = (await this.spotify.getRecommendations(this.auth_token, ",", seedSongs, "100", "50")).tracks
       recommendedSongs = recommendedSongs.concat(recommendedSongsReq)
+      this.progress += 5
     }
 
     return recommendedSongs;
@@ -134,7 +138,8 @@ export class GenerateComponent {
     // seedSongsList = this.tailorArray(seedSongsList, 5)
     // var seedSong = seedSongsList.join(",")
 
-    const recommendedSongs: string[] = (await this.spotify.getRecommendations(this.auth_token, seedArtist, ",", "100", "50")).tracks;
+    const recommendedSongs: SpotifySong[] = (await this.spotify.getRecommendations(this.auth_token, seedArtist, ",", "100", "50")).tracks;
+    this.progress += 5
     return recommendedSongs;
   }
 
@@ -187,4 +192,21 @@ export class GenerateComponent {
     return Math.floor(Math.random() * max)
   }
 
+  private tailorArray(array: any[], target: number) {
+    var finalArray:any[] = []
+    for (var i = 0 ; i < target ; i++){
+      finalArray.push(array[this.getRandomNumber(array.length)])
+    }
+    return finalArray;
+  }
+
+  private shufflePlaylist(playlist:SpotifySong[]) {
+    let shuffledPlaylist:SpotifySong[] = [];
+    while (playlist.length > 0){
+      let randIndex = this.getRandomNumber(playlist.length)
+      shuffledPlaylist.push(playlist[randIndex])
+      playlist.splice(randIndex,1)
+    }
+    return shuffledPlaylist
+  }
 }

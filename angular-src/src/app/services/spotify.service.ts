@@ -9,7 +9,9 @@ import { SpotifyUserProfile } from 'src/interfaces/spotify.interface';
 
 export class SpotifyService {
 
-    constructor (private http: HttpClient){}
+    userProfile: SpotifyUserProfile | undefined = undefined
+
+    constructor (){}
 
     // AUTH
     clientLogIn() {
@@ -39,12 +41,18 @@ export class SpotifyService {
     // USER
     async getUserProfile(token: string) {
       var url = 'https://api.spotify.com/v1/me';
-      const result = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` }})
-      return await result.json();
+      let result = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` }})
+      let resultJson = await result.json()
+      this.userProfile = resultJson;
+      return await resultJson;
     }
 
-    getUserProfileName(token: string){
-      return this.getUserProfile(token).then((res: SpotifyUserProfile) => { return res.display_name; })
+    getUserProfileName(){
+      return this.userProfile?.display_name
+    }
+
+    getUserProfileId(){
+      return this.userProfile?.id
     }
 
     // TOP
@@ -56,18 +64,38 @@ export class SpotifyService {
     }
 
     // RECOMMENDATIONS
-    async getRecommendations(token: string, seedArtists: string, seedTracks: string, limit:string, maxPopularity: string){
-      var url = 'https://api.spotify.com/v1/recommendations'
-      url += '?' + new URLSearchParams({ 
+    async getRecommendations(token: string, seedArtists: string, seedTracks: string, limit: string = '20', maxPopularity: string = '100') {
+      const queryString = new URLSearchParams({ 
         'seed_artists': seedArtists,
         'seed_genres': ",",
         'seed_tracks': seedTracks,
         'limit': limit,
         'maxPopularity': maxPopularity }).toString();
-      const result = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` }})
+      const url = `https://api.spotify.com/v1/recommendations?${queryString}`;
+      const headers = { Authorization: `Bearer ${token}` };
+      const result = await fetch(url, { method: "GET", headers: headers });
+      const data = await result.json();
+      return data;
+    }
+
+    // PLAYLIST
+    async createPlaylist(token: string, userId: string, name: string ){
+      let url = `https://api.spotify.com/v1/users/${userId}/playlists`
+      let headers = { 'Authorization': 'Bearer ' + token};
+      let body = { "name": name, "description": "", "public": false };
+      let result = await fetch(url, { method: "POST", headers: headers, body: JSON.stringify(body)})
       return await result.json();
     }
 
-    // CREATE PLAYLIST
-    
+    async addItemToPlaylist(token: string, playlist_id: string, uris: string[]){
+      let url = `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`
+      let headers = { 'Authorization': 'Bearer ' + token};
+      let body = { "uris": uris };
+
+      console.log(url)
+      console.log(headers)
+      console.log(JSON.stringify(body))
+      let result = await fetch(url, { method: "POST", headers: headers, body: JSON.stringify(body)})
+      return await result.json();
+    }
 }

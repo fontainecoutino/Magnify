@@ -10,6 +10,7 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 export class DashboardComponent {
   access_token = "";
   username = "";
+  id = "";
 
   userLoggedIn = false;
 
@@ -40,11 +41,10 @@ export class DashboardComponent {
   }
 
   loadContent(){
-    this.spotify.getUserProfileName(this.access_token).then((res)=>{
-      this.username = res;
-    })
+    this.username = (this.spotify.getUserProfileName() || "there");
+    this.id = (this.spotify.getUserProfileId() || "");
     this.userLoggedIn = true;
-    this. shouldContentFadeIn = true;
+    this.shouldContentFadeIn = true;
     
   }
 
@@ -54,7 +54,7 @@ export class DashboardComponent {
   }
 
   onCreate(){
-    this.router.navigate([ '/generate' ], {queryParams: { auth_token: this.access_token }})
+    this.router.navigate([ '/generate' ], {queryParams: { auth_token: this.access_token, user_id: this.id }})
   }
 
   /**
