@@ -39,7 +39,7 @@ export class SpotifyService {
     // USER
     async getUserProfile(token: string) {
       var url = 'https://api.spotify.com/v1/me';
-      const result = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` }});
+      const result = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` }})
       return await result.json();
     }
 
@@ -48,10 +48,26 @@ export class SpotifyService {
     }
 
     // TOP
-    // async getTopItem(token: string, type: string){
-    //   var url = 'https://api.spotify.com/v1/me/top/' + type + '?' + new URLSearchParams({ 'foo': 'value', 'bar': 2 }).toString();
-    //   const result = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` }});
-    //   return await result.json();
-    // }
+    async getTopItem(token: string, type: string, limit:string, timeRange: string){
+      var url = 'https://api.spotify.com/v1/me/top/' + type 
+      url += '?' + new URLSearchParams({ 'limit': limit, 'time_range': timeRange }).toString();
+      const result = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` }})
+      return await result.json();
+    }
 
+    // RECOMMENDATIONS
+    async getRecommendations(token: string, seedArtists: string, seedTracks: string, limit:string, maxPopularity: string){
+      var url = 'https://api.spotify.com/v1/recommendations'
+      url += '?' + new URLSearchParams({ 
+        'seed_artists': seedArtists,
+        'seed_genres': ",",
+        'seed_tracks': seedTracks,
+        'limit': limit,
+        'maxPopularity': maxPopularity }).toString();
+      const result = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}` }})
+      return await result.json();
+    }
+
+    // CREATE PLAYLIST
+    
 }

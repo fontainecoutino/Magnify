@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyService } from 'src/app/services/spotify.service';
-import { SpotifyArtist } from 'src/interfaces/spotify.interface';
+import { AvailableGenreSeeds, SpotifyArtist } from 'src/interfaces/spotify.interface';
 import { SpotifySong } from 'src/interfaces/spotify.interface';
 
 @Component({
@@ -10,14 +10,21 @@ import { SpotifySong } from 'src/interfaces/spotify.interface';
   styleUrls: ['./generate.component.css'],
 })
 export class GenerateComponent {
+  
+  auth_token = "";
+  
   userLoggedIn = false;
   progress = 0;
+
+  ArtistsList: Map<string, SpotifyArtist> = new Map();
+  SongsList: Map<string, SpotifySong> = new Map();
 
   constructor(private route: ActivatedRoute, private spotify: SpotifyService) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.spotify.checkToken(params['auth_token']).then((valid) => {
+      this.auth_token = params['auth_token'];
+      this.spotify.checkToken(this.auth_token).then((valid) => {
         if (valid) {
           this.loadContent();
         } else {
@@ -34,81 +41,107 @@ export class GenerateComponent {
     this.createPlaylist();
   }
 
-  createPlaylist() {
+  async createPlaylist() {
+    console.log('creating playlist ...')
     // get data set
-    var artists: Map<string, number> = this.getTopArtists();
-    var songs: string[] = this.getTopSongs(artists);
-    this.progress += 25
+    var artists: Map<string, number> = await this.getTopArtists();
+    var songs: string[] = await this.getTopSongs(artists);
+    this.progress += 20
 
     // get recommendations
-    var artistRecommendedSongs: string[] = this.getArtistsRecomendations(artists);
-    var songsRecommendedSongs: string[] = this.getSongsRecomendations(songs);
-    this.progress += 25
+    var artistRecommendedSongs: string[] = await this.getArtistsRecomendations(artists);
+    var songsRecommendedSongs: string[] = await this.getSongsRecomendations(songs);
+    this.progress += 20
 
     // tailor songs
-    var tailoredArtistSongs: string[] = this.tailorSongs(artistRecommendedSongs, 5)
-    var tailoredSongsSongs: string[] = this.tailorSongs(songsRecommendedSongs, 20)
+    var tailoredArtistSongs: string[] = this.tailorArray(artistRecommendedSongs, 5)
+    var tailoredSongsSongs: string[] = this.tailorArray(songsRecommendedSongs, 20)
     var playlistSongs: string[] = tailoredArtistSongs.concat(tailoredSongsSongs)
-    this.progress += 25
+    this.progress += 20
+
+    console.log(playlistSongs)
+    console.log(this.progress)
 
     // get image
-    this.progress += 25
+    this.progress += 20
 
     // create and publish playlist
+    this.progress += 20
     
   }
 
-  tailorSongs(songs: string[], target: number) {
-    var finalSongs:string[] = []
+  tailorArray(array: any[], target: number) {
+    var finalArray:any[] = []
     for (var i = 0 ; i < target ; i++){
-      finalSongs.push(songs[this.getRandomNumber(songs.length)])
+      finalArray.push(array[this.getRandomNumber(array.length)])
     }
-    return finalSongs;
+    return finalArray;
   }
 
-  getSongsRecomendations(songs: string[]) {
+  async getSongsRecomendations(songs: string[]) {
     var recommendedSongs: string[] = []
 
-    for (var i = 0; i < 4 ; i++){
-      var songsToRecommend: string[] = []
-      for (var i = 0 ; i < 5 ; i++ ){
-        songsToRecommend.push(songs[this.getRandomNumber(songs.length)])
-      }
+    for (let i = 0; i < 4 ; i++){
+      let songsToRecommend: string[] = this.tailorArray(songs, 5);
+      let seedSongs = songsToRecommend.join(",")
       // recommendation req (100, max_popularity .5)
-      var recommendedSongsReq: string[] = []
-      recommendedSongs = recommendedSongs.concat(recommendedSongs)
+      let recommendedSongsReq: string[] = (await this.spotify.getRecommendations(this.auth_token, ",", seedSongs, "100", "50")).tracks
+      recommendedSongs = recommendedSongs.concat(recommendedSongsReq)
     }
 
     return recommendedSongs;
   }
 
-  getArtistsRecomendations(artists: Map<string, number>) {
+  async getArtistsRecomendations(artists: Map<string, number>) {
     // get top artists
     var topArtist: string[] = [];
-    for (var entry of artists.entries()){
-      var artist: string = entry[0];
-      var ocurrances: number = entry[1];
+    for (let entry of artists.entries()){
+      let artist: string = entry[0];
+      let ocurrances: number = entry[1];
       if (ocurrances > 2) {
         topArtist.push(artist)
       }
     }
 
-    // get 5 recommendations from a randomly selected artist
-    var artistsToRecommend: string[] = []
-    for (var i = 0 ; i < 5 ; i++ ){
-      var randIndex: number = this.getRandomNumber(topArtist.length);
-      artistsToRecommend.push(topArtist[randIndex])
-    }
-    // recommendation req (100, max_popularity .5)
-    const recommendedSongs: string[] = []
+    // get 5 randomly selected artist
+    var artistsToRecommend: string[] = this.tailorArray(topArtist, 5)
+    var seedArtist = artistsToRecommend.join(",")
 
+    // get their genres
+    // var seedGenresList: string[] = []
+    // for (let artist of artistsToRecommend){
+    //   var genres = this.ArtistsList.get(artist)?.genres
+    //   if (genres){
+    //     var genresToConcat: string[] = []
+    //     for (var genre of genres){
+    //       if (AvailableGenreSeeds.validGenre(genre)) genresToConcat.push(genre);
+    //     }
+    //     seedGenresList = seedGenresList.concat(genresToConcat) 
+    //   }
+    // }
+    // seedGenresList = this.tailorArray(seedGenresList, 5)
+    // var seedGerne = seedGenresList.join(",")
+
+    // get song list seeds
+    // var seedSongsList: string[] = []
+    // for (var song of this.SongsList.entries()){
+    //   var songId = song[0]
+    //   var songArtists = song[1].artists
+    //   for (let artist of songArtists){
+    //     if (artistsToRecommend.includes(artist.id)) seedSongsList.push(songId);
+    //   }
+    // }
+    // seedSongsList = this.tailorArray(seedSongsList, 5)
+    // var seedSong = seedSongsList.join(",")
+
+    const recommendedSongs: string[] = (await this.spotify.getRecommendations(this.auth_token, seedArtist, ",", "100", "50")).tracks;
     return recommendedSongs;
   }
 
-  getTopArtists() {
+  async getTopArtists() {
     // top artist req (50 rec, medium & long)
-    const topArtistMed: SpotifyArtist[] = []
-    const topArtistLong: SpotifyArtist[] = []
+    const topArtistMed: SpotifyArtist[] = (await this.spotify.getTopItem(this.auth_token, "artists", "50", "medium_term")).items
+    const topArtistLong: SpotifyArtist[] = (await this.spotify.getTopItem(this.auth_token, "artists", "50", "long_term")).items
     const topArtist: SpotifyArtist[] = topArtistMed.concat(topArtistLong)
 
     var artists: Map<string, number> = new Map();
@@ -117,24 +150,29 @@ export class GenerateComponent {
         artists.set(artist.id, 0)
       }
       artists.set(artist.id, (artists.get(artist.id) || 0) + 1)
+      this.ArtistsList.set(artist.id, artist)
     }
     return artists
   }
 
-  getTopSongs(artists: Map<string, number>) {
+  async getTopSongs(artists: Map<string, number>) {
     // top songs req (50 rec, medium & long)
-    const topSongsMed: SpotifySong[] = []
-    const topSongsLong: SpotifySong[] = []
+    const topSongsMed: SpotifySong[] = (await this.spotify.getTopItem(this.auth_token, "tracks", "50", "medium_term")).items
+    const topSongsLong: SpotifySong[] = (await this.spotify.getTopItem(this.auth_token, "tracks", "50", "long_term")).items
     const topSongs: SpotifySong[] = topSongsMed.concat(topSongsLong)
 
     var songs: string[] = []
     for (var song of topSongs){
       songs.push(song.id)
+      this.SongsList.set(song.id, song)
       for (var artist of song.artists){
         if (!artists.has(artist.id)){
           artists.set(artist.id, 0)
         }
         artists.set(artist.id, (artists.get(artist.id) || 0) + 1)
+        if (!this.ArtistsList.has(artist.id)){
+          this.ArtistsList.set(artist.id, artist)
+        }
       }
     }
     return songs;

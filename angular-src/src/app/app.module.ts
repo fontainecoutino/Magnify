@@ -16,6 +16,7 @@ import { HelpPageComponent } from './components/pages/help-page/help-page.compon
 import { PagenotfoundComponent } from './components/pages/pagenotfound/pagenotfound.component';
 import { GenerateComponent } from './components/pages/generate/generate.component';
 import { SpotifyService } from './services/spotify.service';
+import { LoadingPageComponent } from './components/shared/loading-page/loading-page.component';
 
 
 const appRoutes: Routes = [
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     AboutComponent,
     HelpPageComponent,
     PagenotfoundComponent,
-    GenerateComponent
+    GenerateComponent,
+    LoadingPageComponent
   ],
   imports: [
     BrowserModule,
