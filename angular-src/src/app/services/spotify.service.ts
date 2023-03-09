@@ -91,10 +91,6 @@ export class SpotifyService {
       let url = `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`
       let headers = { 'Authorization': 'Bearer ' + token};
       let body = { "uris": uris };
-
-      console.log(url)
-      console.log(headers)
-      console.log(JSON.stringify(body))
       let result = await fetch(url, { method: "POST", headers: headers, body: JSON.stringify(body)})
       return await result.json();
     }

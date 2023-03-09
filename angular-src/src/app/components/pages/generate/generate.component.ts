@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SpotifyService } from 'src/app/services/spotify.service';
 import { AvailableGenreSeeds, SpotifyArtist } from 'src/interfaces/spotify.interface';
 import { SpotifySong } from 'src/interfaces/spotify.interface';
@@ -15,12 +15,14 @@ export class GenerateComponent {
   id = "";
   
   userLoggedIn = false;
+
   progress = 0;
+  STEPS = 5
 
   ArtistsList: Map<string, SpotifyArtist> = new Map();
   SongsList: Map<string, SpotifySong> = new Map();
 
-  constructor(private route: ActivatedRoute, private spotify: SpotifyService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private spotify: SpotifyService) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -34,53 +36,50 @@ export class GenerateComponent {
         }
       });
     });
-
-    
   }
   
-  loadContent() {
+  async loadContent() {
     this.userLoggedIn = true;
-    this.createPlaylist();
+    var finalPlaylist = this.createPlaylist();
+    var playlistId = this.publishPlaylist(await finalPlaylist);
+    this.router.navigate([ '/completed' ], {queryParams: { auth_token: this.auth_token, playlist_id: playlistId }})
   }
 
   async createPlaylist() {
-    console.log('creating playlist ...')
-    // get data set
+    // get data set 25%
     var artists: Map<string, number> = await this.getTopArtists();
     var songs: string[] = await this.getTopSongs(artists);
-    this.progress += 20
+    this.increaseProgress(5)
 
-    // get recommendations
+    // get recommendations 50%
     var artistRecommendedSongs: SpotifySong[] = await this.getArtistsRecomendations(artists);
     var songsRecommendedSongs: SpotifySong[] = await this.getSongsRecomendations(songs);
-    this.progress += 20
 
     // tailor songs
-    var tailoredArtistSongs: SpotifySong[] = this.tailorArray(artistRecommendedSongs, 5)
-    var tailoredSongsSongs: SpotifySong[] = this.tailorArray(songsRecommendedSongs, 20)
+    var tailoredArtistSongs: SpotifySong[] = this.tailorArray(artistRecommendedSongs, 10)
+    var tailoredSongsSongs: SpotifySong[] = this.tailorArray(songsRecommendedSongs, 40)
     var playlistSongs: SpotifySong[] = tailoredArtistSongs.concat(tailoredSongsSongs)
     playlistSongs = this.shufflePlaylist(playlistSongs)
 
-
-    // create and publish playlist
-    this.publishPlaylist(playlistSongs)
-    this.progress += 20
-
-    // get image
-    this.progress += 20
-    
+    return playlistSongs;
   }
   
   async publishPlaylist(playlist: SpotifySong[]) {
-    console.log(playlist)
-    var playlistId = (await this.spotify.createPlaylist(this.auth_token, this.id ,"pano-shein")).id
+    // get name
+    var playlistName = "Discover - Magnify"
 
+    // create playlist
+    var playlistId = (await this.spotify.createPlaylist(this.auth_token, this.id ,playlistName)).id
+
+    // add songs to playlist
     var uris: string[] = []
     for (var song of playlist){
       uris.push(`${song.uri}`)
     }
     this.spotify.addItemToPlaylist(this.auth_token, playlistId, uris)
 
+    this.increaseProgress(5)
+    return playlistId;
   }
 
   async getSongsRecomendations(songs: string[]) {
@@ -91,7 +90,7 @@ export class GenerateComponent {
       let seedSongs = songsToRecommend.join(",")
       let recommendedSongsReq: SpotifySong[] = (await this.spotify.getRecommendations(this.auth_token, ",", seedSongs, "100", "50")).tracks
       recommendedSongs = recommendedSongs.concat(recommendedSongsReq)
-      this.progress += 5
+      this.increaseProgress(2)
     }
 
     return recommendedSongs;
@@ -140,7 +139,7 @@ export class GenerateComponent {
     // var seedSong = seedSongsList.join(",")
 
     const recommendedSongs: SpotifySong[] = (await this.spotify.getRecommendations(this.auth_token, seedArtist, ",", "100", "50")).tracks;
-    this.progress += 5
+    this.increaseProgress(2)
     return recommendedSongs;
   }
 
@@ -187,6 +186,10 @@ export class GenerateComponent {
   errorLoginIn() {
     console.log('There was an error during the authentication');
     //this.router.navigate([ '/' ])
+  }
+
+  private increaseProgress(num: number){
+    this.progress += (num * this.STEPS)
   }
 
   private getRandomNumber(max: number) {
