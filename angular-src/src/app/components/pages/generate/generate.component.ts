@@ -61,6 +61,7 @@ export class GenerateComponent {
     var playlistSongs: SpotifySong[] = tailoredArtistSongs.concat(tailoredSongsSongs)
     playlistSongs = this.shufflePlaylist(playlistSongs)
 
+
     // create and publish playlist
     this.publishPlaylist(playlistSongs)
     this.progress += 20
@@ -194,8 +195,9 @@ export class GenerateComponent {
 
   private tailorArray(array: any[], target: number) {
     var finalArray:any[] = []
-    for (var i = 0 ; i < target ; i++){
-      finalArray.push(array[this.getRandomNumber(array.length)])
+    while (finalArray.length < target){
+      let toAdd = array[this.getRandomNumber(array.length)]
+      if (!finalArray.includes(toAdd)) finalArray.push(toAdd)
     }
     return finalArray;
   }
