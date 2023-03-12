@@ -94,4 +94,10 @@ export class SpotifyService {
       let result = await fetch(url, { method: "POST", headers: headers, body: JSON.stringify(body)})
       return await result.json();
     }
+
+    async getPlaylistEmbeded(href:string){
+      let url = `https://open.spotify.com/oembed?url=${href}`
+      let result = await fetch(url, { method: "GET"})
+      return await result.json();
+    }
 }

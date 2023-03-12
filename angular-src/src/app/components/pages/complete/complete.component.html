@@ -1,0 +1,27 @@
+<app-loading-page [userLoggedIn]="userLoggedIn"></app-loading-page>
+
+<div class="page" *ngIf="userLoggedIn">
+    <div class="content row">
+        <div class="left-component col-7">
+            <div class="title-group">
+                <h1 class="page-title">Done!</h1>
+            </div>
+            <div class="message-group">
+                <p class="lead">
+                    Your playlist has been created! Hope you like what we have recommended
+                    for you. We recommend coming back in a week and get a brand new playlist!
+                </p>
+            </div>
+            <div class="login-component">
+                
+
+                <button type="button" class="btn btn-login" (click)="onTakeHome();">
+                    Take me home
+                </button>
+            </div>
+        </div>
+        <div *ngIf="isEmbededLoaded" class="right-component col-5" [innerHTML]="embeded | safeHtml">
+            <app-loading-page [userLoggedIn]="isEmbededLoaded"></app-loading-page>
+        </div>
+    </div>
+</div>

@@ -17,6 +17,7 @@ import { PagenotfoundComponent } from './components/pages/pagenotfound/pagenotfo
 import { GenerateComponent } from './components/pages/generate/generate.component';
 import { SpotifyService } from './services/spotify.service';
 import { LoadingPageComponent } from './components/shared/loading-page/loading-page.component';
+import { CompleteComponent, SafeHtmlPipe } from './components/pages/complete/complete.component';
 
 
 const appRoutes: Routes = [
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'help', component: HelpPageComponent},
   {path: 'generate', component: GenerateComponent},
+  {path: 'complete', component: CompleteComponent},
 
   { path: '**', pathMatch: 'full', 
         component: PagenotfoundComponent },
@@ -41,7 +43,9 @@ const appRoutes: Routes = [
     HelpPageComponent,
     PagenotfoundComponent,
     GenerateComponent,
-    LoadingPageComponent
+    LoadingPageComponent,
+    CompleteComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,

@@ -41,8 +41,8 @@ export class GenerateComponent {
   async loadContent() {
     this.userLoggedIn = true;
     var finalPlaylist = this.createPlaylist();
-    var playlistId = this.publishPlaylist(await finalPlaylist);
-    this.router.navigate([ '/completed' ], {queryParams: { auth_token: this.auth_token, playlist_id: playlistId }})
+    var playlistHref = await this.publishPlaylist(await finalPlaylist);
+    this.router.navigate([ '/complete' ], {queryParams: { playlist_href: playlistHref }})
   }
 
   async createPlaylist() {
@@ -69,17 +69,17 @@ export class GenerateComponent {
     var playlistName = "Discover - Magnify"
 
     // create playlist
-    var playlistId = (await this.spotify.createPlaylist(this.auth_token, this.id ,playlistName)).id
+    var playlistObj = await this.spotify.createPlaylist(this.auth_token, this.id ,playlistName)
 
     // add songs to playlist
     var uris: string[] = []
     for (var song of playlist){
       uris.push(`${song.uri}`)
     }
-    this.spotify.addItemToPlaylist(this.auth_token, playlistId, uris)
+    this.spotify.addItemToPlaylist(this.auth_token, playlistObj.id, uris)
 
     this.increaseProgress(5)
-    return playlistId;
+    return playlistObj.external_urls.spotify;
   }
 
   async getSongsRecomendations(songs: string[]) {
