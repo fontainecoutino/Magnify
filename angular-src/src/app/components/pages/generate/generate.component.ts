@@ -41,6 +41,7 @@ export class GenerateComponent {
   async loadContent() {
     this.userLoggedIn = true;
     var finalPlaylist = this.createPlaylist();
+    this.increaseProgress(5)
     var playlistHref = await this.publishPlaylist(await finalPlaylist);
     this.router.navigate([ '/complete' ], {queryParams: { playlist_href: playlistHref }})
   }
@@ -78,7 +79,6 @@ export class GenerateComponent {
     }
     this.spotify.addItemToPlaylist(this.auth_token, playlistObj.id, uris)
 
-    this.increaseProgress(5)
     return playlistObj.external_urls.spotify;
   }
 

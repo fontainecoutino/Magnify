@@ -12,16 +12,17 @@
                     for you. We recommend coming back in a week and get a brand new playlist!
                 </p>
             </div>
-            <div class="login-component">
-                
-
+            <div class="login-component animate__animated animate__fadeIn" *ngIf="showHome">
                 <button type="button" class="btn btn-login" (click)="onTakeHome();">
                     Take me home
                 </button>
             </div>
         </div>
-        <div *ngIf="isEmbededLoaded" class="right-component col-5" [innerHTML]="embeded | safeHtml">
-            <app-loading-page [userLoggedIn]="isEmbededLoaded"></app-loading-page>
+        <div class="right-component col-5 row">
+            <div class="spinner-border" role="status" *ngIf="!isEmbededLoaded">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            <div class="animate__animated animate__fadeIn" *ngIf="isEmbededLoaded" [innerHTML]="embeded | safeHtml"></div>
         </div>
     </div>
 </div>

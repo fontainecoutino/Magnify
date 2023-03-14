@@ -1,6 +1,7 @@
 import { Component, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { delay } from 'rxjs';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Pipe({ name: "safeHtml" })
@@ -22,6 +23,7 @@ export class CompleteComponent {
   playlist_href = "";
   embeded = "";
   isEmbededLoaded = false;
+  showHome = false;
 
   constructor( private router: Router, private route: ActivatedRoute, private spotify: SpotifyService ) { }
   ngOnInit() {
@@ -34,13 +36,18 @@ export class CompleteComponent {
   async loadContent() {
     this.userLoggedIn = true;
     var embedObj = await this.spotify.getPlaylistEmbeded(this.playlist_href)
-    // this.embeded = this.sanitizeSpotifyEmbededObj(embedObj)
-    // this.isEmbededLoaded = true
-    this.embeded = ""
+    this.embeded = this.sanitizeSpotifyEmbededObj(embedObj)
+    this.isEmbededLoaded = true
+    await this.sleep(3000);
+    this.showHome = true
   }
 
   onTakeHome(){
     this.router.navigate([ '/' ])
+  }
+
+  sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   private sanitizeSpotifyEmbededObj(obj:any){
