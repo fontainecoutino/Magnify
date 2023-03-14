@@ -144,10 +144,9 @@ export class GenerateComponent {
   }
 
   async getTopArtists() {
-    // top artist req (50 rec, medium & long)
-    const topArtistMed: SpotifyArtist[] = (await this.spotify.getTopItem(this.auth_token, "artists", "50", "medium_term")).items
+    const topArtistShort: SpotifyArtist[] = (await this.spotify.getTopItem(this.auth_token, "artists", "50", "short_term")).items
     const topArtistLong: SpotifyArtist[] = (await this.spotify.getTopItem(this.auth_token, "artists", "50", "long_term")).items
-    const topArtist: SpotifyArtist[] = topArtistMed.concat(topArtistLong)
+    const topArtist: SpotifyArtist[] = topArtistShort.concat(topArtistLong)
 
     var artists: Map<string, number> = new Map();
     for (var artist of topArtist){
@@ -161,10 +160,9 @@ export class GenerateComponent {
   }
 
   async getTopSongs(artists: Map<string, number>) {
-    // top songs req (50 rec, medium & long)
+    const topSongsShort: SpotifySong[] = (await this.spotify.getTopItem(this.auth_token, "tracks", "50", "short_term")).items
     const topSongsMed: SpotifySong[] = (await this.spotify.getTopItem(this.auth_token, "tracks", "50", "medium_term")).items
-    const topSongsLong: SpotifySong[] = (await this.spotify.getTopItem(this.auth_token, "tracks", "50", "long_term")).items
-    const topSongs: SpotifySong[] = topSongsMed.concat(topSongsLong)
+    const topSongs: SpotifySong[] = topSongsShort.concat(topSongsMed)
 
     var songs: string[] = []
     for (var song of topSongs){
