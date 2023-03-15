@@ -1,10 +1,10 @@
 <app-loading-page [userLoggedIn]="userLoggedIn"></app-loading-page>
 <app-error-modal [error]="errorMsg" *ngIf="error"></app-error-modal>
 
-<div class="not-found" *ngIf="userLoggedIn">
-    <div class="content animate__animated animate__jackInTheBox">
+<div class="not-found" *ngIf="userLoggedIn" [class.animate__fadeOutUp]="shouldFadeOut">
+    <div class="content animate__animated animate__fadeInUp">
         <div class="title-group">
-            <h1 class="title-text spotify-title animate__animated animate__jackInTheBox">Hi {{username}}</h1>
+            <h1 class="title-text spotify-title">Hi {{username}}</h1>
         </div>
         <div class="welcome-message-group">
             <p class="lead">

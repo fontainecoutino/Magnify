@@ -20,6 +20,6 @@ export class HomeComponent {
   async sleep(seconds: number){
     await new Promise(resolve => {
       return setTimeout(resolve, seconds * 1000)
-  });
+    });
   }
 }

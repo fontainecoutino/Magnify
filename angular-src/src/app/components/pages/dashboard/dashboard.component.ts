@@ -22,6 +22,7 @@ export class DashboardComponent {
   showAlgorithmDescription = false;
   showCustomizeDescription = false;
   showMagnifyDescription = false;
+  shouldFadeOut = false;
 
   constructor(private router: Router, private spotify: SpotifyService ) {
     this.access_token = "";
@@ -55,7 +56,9 @@ export class DashboardComponent {
     this.error = true;
   }
 
-  onCreate(){
+  async onCreate(){
+    this.shouldFadeOut = true;
+    await this.sleep(.5);
     this.router.navigate([ '/generate' ], {queryParams: { auth_token: this.access_token, user_id: this.id }})
   }
 
@@ -83,5 +86,11 @@ export class DashboardComponent {
     } else {
       return false
     }
+  }
+
+  async sleep(seconds: number){
+    await new Promise(resolve => {
+      return setTimeout(resolve, seconds * 1000)
+    });
   }
 }
