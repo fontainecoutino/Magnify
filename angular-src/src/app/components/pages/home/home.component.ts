@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 
 export class HomeComponent {
   shouldFadeOut = false;
+  error = true
   constructor( private router: Router ) { }
-  onLogin(){
+  async onLogin(){
     this.shouldFadeOut = true;
-    this.sleep(.5);
-    console.log('here')
+    await this.sleep(.5);
     this.router.navigate([ '/dashboard' ])
   }
 
@@ -22,5 +22,4 @@ export class HomeComponent {
       return setTimeout(resolve, seconds * 1000)
   });
   }
-  
 }

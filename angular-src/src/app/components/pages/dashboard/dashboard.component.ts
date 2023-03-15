@@ -13,6 +13,8 @@ export class DashboardComponent {
   id = "";
 
   userLoggedIn = false;
+  errorMsg = "";
+  error = false;
 
   shouldContentFadeIn = false;
   shouldContentFadeLeft = false;
@@ -49,8 +51,8 @@ export class DashboardComponent {
   }
 
   errorLoginIn() {
-    console.log('There was an error during the authentication');
-    //this.router.navigate([ '/' ])
+    this.errorMsg = 'Authentication error.';
+    this.error = true;
   }
 
   onCreate(){

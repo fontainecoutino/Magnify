@@ -15,6 +15,8 @@ export class GenerateComponent {
   id = "";
   
   userLoggedIn = false;
+  errorMsg = "";
+  error = false;
 
   progress = 0;
   STEPS = 5
@@ -32,7 +34,7 @@ export class GenerateComponent {
         if (valid) {
           this.loadContent();
         } else {
-          this.errorLoginIn();
+          this.errorFound('login');
         }
       });
     });
@@ -40,10 +42,20 @@ export class GenerateComponent {
   
   async loadContent() {
     this.userLoggedIn = true;
-    var finalPlaylist = this.createPlaylist();
+    var finalPlaylist = null
+    try {
+      finalPlaylist = this.createPlaylist();
+    }catch (err) {
+      this.errorFound('playlist')
+    }
     this.increaseProgress(5)
-    var playlistHref = await this.publishPlaylist(await finalPlaylist);
-    this.router.navigate([ '/complete' ], {queryParams: { playlist_href: playlistHref }})
+
+    try {
+      var playlistHref = await this.publishPlaylist(await finalPlaylist);
+      this.router.navigate([ '/complete' ], {queryParams: { playlist_href: playlistHref }})
+    }catch (err) {
+      this.errorFound('publish')
+    }
   }
 
   async createPlaylist() {
@@ -65,7 +77,10 @@ export class GenerateComponent {
     return playlistSongs;
   }
   
-  async publishPlaylist(playlist: SpotifySong[]) {
+  async publishPlaylist(playlist: SpotifySong[] | null) {
+    if (playlist == null){
+      return null
+    }
     // get name
     var playlistName = "Discover - Magnify"
 
@@ -181,9 +196,23 @@ export class GenerateComponent {
     return songs;
   }
 
-  errorLoginIn() {
-    console.log('There was an error during the authentication');
-    //this.router.navigate([ '/' ])
+  errorFound(type:string) {
+    switch (type.toLowerCase()){
+      case "login":
+        this.errorMsg = 'Authentication error.';
+        this.error = true; 
+        break;
+      case "playlist":
+        this.errorMsg = 'Error while gathering information.';
+        this.error = true; 
+        break;
+      case "publish":
+        this.errorMsg = 'Error while publishing data.';
+        this.error = true; 
+        break;
+      default:
+        this.error = true;
+    }
   }
 
   private increaseProgress(num: number){
