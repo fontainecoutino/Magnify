@@ -18,6 +18,7 @@ import { GenerateComponent } from './components/pages/generate/generate.componen
 import { SpotifyService } from './services/spotify.service';
 import { LoadingPageComponent } from './components/shared/loading-page/loading-page.component';
 import { CompleteComponent, SafeHtmlPipe } from './components/pages/complete/complete.component';
+import { ErrorModalComponent } from './components/shared/error-modal/error-modal.component';
 
 
 const appRoutes: Routes = [
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
     GenerateComponent,
     LoadingPageComponent,
     CompleteComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    ErrorModalComponent
   ],
   imports: [
     BrowserModule,
