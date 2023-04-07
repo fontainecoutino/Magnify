@@ -19,6 +19,7 @@ import { SpotifyService } from './services/spotify.service';
 import { LoadingPageComponent } from './components/shared/loading-page/loading-page.component';
 import { CompleteComponent, SafeHtmlPipe } from './components/pages/complete/complete.component';
 import { ErrorModalComponent } from './components/shared/error-modal/error-modal.component';
+import { PrivacyAndCookieComponent } from './components/pages/privacy-and-cookie/privacy-and-cookie.component';
 
 
 const appRoutes: Routes = [
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
   {path: 'help', component: HelpPageComponent},
   {path: 'generate', component: GenerateComponent},
   {path: 'complete', component: CompleteComponent},
+  {path: 'privacy', component: PrivacyAndCookieComponent},
 
   { path: '**', pathMatch: 'full', 
         component: PagenotfoundComponent },
@@ -47,7 +49,8 @@ const appRoutes: Routes = [
     LoadingPageComponent,
     CompleteComponent,
     SafeHtmlPipe,
-    ErrorModalComponent
+    ErrorModalComponent,
+    PrivacyAndCookieComponent
   ],
   imports: [
     BrowserModule,

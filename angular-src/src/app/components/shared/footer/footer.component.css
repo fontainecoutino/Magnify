@@ -2,18 +2,10 @@
     font-size: small;
 }
 
-/* .footerLink:link {
-color: red;
+p {
+    cursor: default;
 }
 
-.footerLink:visited {
-color: green;
-}
-
-.footerLink:hover {
-color: hotpink;
-}
-
-.footerLink:active {
-color: blue;
-} */
+a {
+    cursor: pointer;
+} 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -10,7 +11,7 @@ export class FooterComponent {
   fontainesPage: string;
   privacyPage: string;
   
-  constructor(){
+  constructor( private router: Router  ){
     this.fontainesPage = "https://google.com"
     this.privacyPage = "https://google.com"
   }
@@ -20,6 +21,6 @@ export class FooterComponent {
   }
 
   openPrivacyCookiePage(){
-    window.location.href = this.fontainesPage;
+    this.router.navigate([ '/privacy' ])
   }
 }
