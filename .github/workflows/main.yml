@@ -1,0 +1,41 @@
+name: Magnify  Deploy
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up node.js
+        uses: actions/setup-node@v3.3.0
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Replace SpotifyClientID
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '{'
+          tokenSuffix: '}'
+          files: 'src/environments/environment.prod.ts'
+        env:
+          SpotifyClientID: ${{ secrets.SpotifyClientID}}
+          
+      - name: Replace SpotifyRedirctURI
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '{'
+          tokenSuffix: '}'
+          files: 'src/environments/environment.prod.ts'
+        env:
+          SpotifyRedirctURI: ${{ secrets.SpotifyRedirctURI}}
+        
+      - name: Build
+        run: npm run build:prod
