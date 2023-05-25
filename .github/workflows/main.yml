@@ -22,24 +22,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
         
-      - name: Replace SpotifyClientID
-        uses: cschleiden/replace-tokens@v1
-        with:
-          tokenPrefix: '{'
-          tokenSuffix: '}'
-          files: 'src/environments/environment.prod.ts'
-        env:
-          SpotifyClientID: ${{ secrets.SpotifyClientID}}
-          
-      - name: Replace SpotifyRedirctURI
-        uses: cschleiden/replace-tokens@v1
-        with:
-          tokenPrefix: '{'
-          tokenSuffix: '}'
-          files: 'src/environments/environment.prod.ts'
-        env:
-          SpotifyRedirctURI: ${{ secrets.SpotifyRedirctURI}}
-        
       - name: Build
         run: npm run build:prod
 
@@ -50,3 +32,5 @@ jobs:
           build_dir: dist/magnify-app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SPOTIFY_REDIRECT_URI: ${{ secrets.SpotifyRedirctURI}}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SpotifyClientID}}
