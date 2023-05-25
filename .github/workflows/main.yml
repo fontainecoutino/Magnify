@@ -36,3 +36,6 @@ jobs:
           files: 'src/environments/environment.prod.ts'
         env:
           SpotifyRedirctURI: ${{ secrets.SpotifyRedirctURI}}
+        
+      - name: Build
+        run: npm run build:prod
