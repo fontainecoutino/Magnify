@@ -1,4 +1,4 @@
 export const environment = {
-    spotifyClientID: "{SpotifyClientID}",
-    spotifyRedirctURI: "{SpotifyRedirctURI}"
+    spotifyClientID: process.env["SPOTIFY_CLIENT_ID"],
+    spotifyRedirctURI: process.env["SPOTIFY_REDIRECT_URI"]
 };

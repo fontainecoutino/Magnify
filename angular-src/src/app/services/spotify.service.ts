@@ -15,8 +15,8 @@ export class SpotifyService {
 
     // AUTH
     clientLogIn() {
-        var client_id = environment.spotifyClientID;
-        var redirect_uri = environment.spotifyRedirctURI;
+        var client_id = environment.spotifyClientID ||  "";
+        var redirect_uri = environment.spotifyRedirctURI || "";
 
         var scopes: string[] = [
         'user-read-private', 'user-read-email', 'ugc-image-upload', 'playlist-read-private',
