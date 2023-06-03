@@ -1,5 +1,5 @@
 {
-  "name": "spotifymagnify",
+  "name": "magnify",
   "version": "1.0.0",
   "description": "spotify playlist generator",
   "main": "app.js",
