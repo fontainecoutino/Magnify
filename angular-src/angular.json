@@ -97,6 +97,9 @@
               "app/scripts/network.js"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
