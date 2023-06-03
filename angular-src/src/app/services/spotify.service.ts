@@ -15,6 +15,7 @@ export class SpotifyService {
 
     // AUTH
     clientLogIn() {
+      console.log(environment)
         var client_id = environment.spotifyClientID ||  "";
         var redirect_uri = environment.spotifyRedirctURI || "";
 
