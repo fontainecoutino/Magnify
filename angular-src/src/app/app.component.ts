@@ -15,7 +15,7 @@ export class AppComponent {
       console.log('Development!');
     } else {
       console.log('Production!');
-      console.log(environment)
+      console.log('ENV:\n', environment)
     }
   }
 }
