@@ -30,7 +30,9 @@ export class SpotifyService {
         url += '&scope=' + encodeURIComponent(scope);
         url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
 
-        window.location.href = url;
+        //window.location.href = url;
+        console.log(client_id, redirect_uri)
+        window.location.href = "https://www.google.com";
     }
 
     async checkToken(token: string) {
