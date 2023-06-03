@@ -32,5 +32,5 @@ jobs:
           build_dir: dist/magnify-app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SPOTIFY_REDIRECT_URI: ${{ secrets.SpotifyRedirctURI}}
-          SPOTIFY_CLIENT_ID: ${{ secrets.SpotifyClientID}}
+          SPOTIFY_REDIRECT_URI: ${{ secrets.SPOTIFY_REDIRECT_URI}}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID}}
