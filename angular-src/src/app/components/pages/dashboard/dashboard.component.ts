@@ -31,6 +31,7 @@ export class DashboardComponent {
   ngOnInit() {
     if (this.getHashParams()){   // log in to spotify was succesful
       this.spotify.checkToken(this.access_token).then((value)=>{
+        console.log('valid token:', value)
         if (value) {
           this.loadContent()
         } else {
