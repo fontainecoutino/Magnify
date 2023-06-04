@@ -1,4 +1,4 @@
 export const environment = {
-    spotifyClientID: '${process.env["SPOTIFY_CLIENT_ID"]}',
-    spotifyRedirctURI: '${process.env["SPOTIFY_REDIRECT_URI"]}'
+    spotifyClientID: '0c20a179bfdc449cb94776bacb154144',
+    spotifyRedirctURI: 'https://fontainecoutino.github.io/Magnify/'
 };
